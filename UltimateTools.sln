@@ -1,0 +1,31 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.5.33627.172
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UltimaKeyb", "UltimaKeyb\UltimaKeyb.csproj", "{AF54AD04-74CA-4964-BFF9-09BF55366A9D}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UltimaRunPrg", "UltimaRunPrg\UltimaRunPrg.csproj", "{DC6ADDBB-EC1A-4872-8046-71C6A129F2E4}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{AF54AD04-74CA-4964-BFF9-09BF55366A9D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{AF54AD04-74CA-4964-BFF9-09BF55366A9D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{AF54AD04-74CA-4964-BFF9-09BF55366A9D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{AF54AD04-74CA-4964-BFF9-09BF55366A9D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{DC6ADDBB-EC1A-4872-8046-71C6A129F2E4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{DC6ADDBB-EC1A-4872-8046-71C6A129F2E4}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{DC6ADDBB-EC1A-4872-8046-71C6A129F2E4}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{DC6ADDBB-EC1A-4872-8046-71C6A129F2E4}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {BB2805BA-3E57-4198-988C-AE2277B0797D}
+	EndGlobalSection
+EndGlobal
