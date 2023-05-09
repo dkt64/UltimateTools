@@ -7,6 +7,10 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UltimaKeyb", "UltimaKeyb\Ul
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UltimaRunPrg", "UltimaRunPrg\UltimaRunPrg.csproj", "{DC6ADDBB-EC1A-4872-8046-71C6A129F2E4}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UltimaVideoPlayer", "UltimaVideoPlayer\UltimaVideoPlayer.csproj", "{3EC33D9C-3BA9-4F10-BC9A-16DF815442BB}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UltimaVideoPlayer2", "UltimaVideoPlayer2\UltimaVideoPlayer2.csproj", "{1EE95C6C-1D3C-4667-BAC7-CB21655953F7}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -21,6 +25,14 @@ Global
 		{DC6ADDBB-EC1A-4872-8046-71C6A129F2E4}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{DC6ADDBB-EC1A-4872-8046-71C6A129F2E4}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{DC6ADDBB-EC1A-4872-8046-71C6A129F2E4}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3EC33D9C-3BA9-4F10-BC9A-16DF815442BB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3EC33D9C-3BA9-4F10-BC9A-16DF815442BB}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3EC33D9C-3BA9-4F10-BC9A-16DF815442BB}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3EC33D9C-3BA9-4F10-BC9A-16DF815442BB}.Release|Any CPU.Build.0 = Release|Any CPU
+		{1EE95C6C-1D3C-4667-BAC7-CB21655953F7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1EE95C6C-1D3C-4667-BAC7-CB21655953F7}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1EE95C6C-1D3C-4667-BAC7-CB21655953F7}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1EE95C6C-1D3C-4667-BAC7-CB21655953F7}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
