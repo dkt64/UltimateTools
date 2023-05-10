@@ -6,10 +6,14 @@ using System.ComponentModel;
 using System.Data;
 using System.Drawing;
 using System.Linq;
+using System.Net.Sockets;
+using System.Net;
+using System.Resources;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using System.IO;
 
 namespace UltimaVideoPlayer2 {
     public partial class Form1 : Form {
@@ -22,6 +26,12 @@ namespace UltimaVideoPlayer2 {
         private SynchronizationContext synchContext;
 
         int prog = 60;
+
+        int bytes_sent;
+
+        byte[] c64bmp = new byte[8000];
+
+        Socket mySocket;
 
         // ========================================================================================
         public Form1() {
@@ -36,6 +46,16 @@ namespace UltimaVideoPlayer2 {
 
             textBox1.Clear();
 
+            Thread threadCamera = new Thread(new ThreadStart(Camera));
+            threadCamera.Start();
+          
+
+            Thread threadUltimate = new Thread(new ThreadStart(Ultimate));
+            threadUltimate.Start();
+        }
+
+        // ========================================================================================
+        public async void Camera() {
             var devices = new CaptureDevices();
 
             foreach (var descriptor in devices.EnumerateDescriptors()) {
@@ -49,14 +69,6 @@ namespace UltimaVideoPlayer2 {
                     textBox1.Text += characteristics + Environment.NewLine;
                 }
             }
-
-            Camera();
-
-        }
-
-        // ========================================================================================
-        public async void Camera() {
-            var devices = new CaptureDevices();
 
             var descriptors = devices.EnumerateDescriptors().
                 // You could filter by device type and characteristics.
@@ -118,6 +130,11 @@ namespace UltimaVideoPlayer2 {
 
                     label2.Text = "Frame index = " + bufferScope.Buffer.FrameIndex.ToString();
 
+                    using (var stream = image.AsStream()) {
+                        var bmp_org = Image.FromStream(stream);
+                        pictureBox1.Image = bmp_org;
+                    }
+
                     Bitmap bmp = new Bitmap(320, 180);
                     Graphics gfx = Graphics.FromImage(bmp);
 
@@ -147,8 +164,6 @@ namespace UltimaVideoPlayer2 {
 
                     // C64 part
 
-                    byte[] c64bmp = new byte[8000];
-
                     for (int posy1 = 0; posy1 < 172; posy1 += 8) {
                         for (int posx = 0; posx < 320; posx += 8) {
                             for (int posy2 = 0; posy2 < 8; posy2++) {
@@ -170,7 +185,7 @@ namespace UltimaVideoPlayer2 {
                         }
                     }
 
-                    pictureBox1.Image = bmp;
+                    pictureBox2.Image = bmp;
 
                     bufferScope.ReleaseNow();
                 }
@@ -180,9 +195,75 @@ namespace UltimaVideoPlayer2 {
             }
         }
 
+        // ========================================================================================
         private void trackBar1_Scroll(object sender, EventArgs e) {
             prog = trackBar1.Value;
             label3.Text = "Prog " + prog.ToString();
+        }
+
+        // ========================================================================================
+        public static byte[] Combine(byte[] first, byte[] second) {
+            byte[] bytes = new byte[first.Length + second.Length];
+            Buffer.BlockCopy(first, 0, bytes, 0, first.Length);
+            Buffer.BlockCopy(second, 0, bytes, first.Length, second.Length);
+            return bytes;
+        }
+
+        // ========================================================================================
+        public void Ultimate() {
+
+            string ipaddr = "192.168.8.123";
+            mySocket = Connect(ipaddr);
+
+            var buf = new byte[] {
+                        0x06,
+                        0xff,
+                        0x42,
+                        0x1f,
+                        0x00,
+                        0x20
+                        };
+
+            while (mySocket.Connected) {
+
+                bytes_sent += mySocket.Send(Combine(buf, c64bmp));
+
+            }
+
+        }
+
+        // ========================================================================================
+        public Socket Connect(string host) {
+            IPAddress[] IPs = Dns.GetHostAddresses(host);
+
+            Socket s = new Socket(AddressFamily.InterNetwork,
+                SocketType.Stream,
+                ProtocolType.Tcp);
+
+            Console.WriteLine("Establishing Connection to {0} at port 64.",
+                host);
+            s.Connect(IPs[0], 64);
+            Console.WriteLine("Connection established :)");
+
+            return s;
+        }
+
+        // ========================================================================================
+        private void timer1_Tick(object sender, EventArgs e) {
+            label4.Text = mySocket.Connected ? "Connected" : "Not connected";
+
+            label5.Text = "Bytes sent " + bytes_sent.ToString();
+        }
+
+        // ========================================================================================
+        private void Form1_FormClosing(object sender, FormClosingEventArgs e) {
+
+            mySocket.Disconnect(false);
+            mySocket.Close();
+
+            captureDevice.StopAsync();
+            captureDevice.Dispose();
+            captureDevice = null;
         }
     }
 }
